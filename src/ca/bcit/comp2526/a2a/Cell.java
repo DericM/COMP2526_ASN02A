@@ -1,13 +1,12 @@
 package ca.bcit.comp2526.a2a;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Point;
 
-import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class Cell extends JComponent{
+public class Cell extends JPanel{
 
     private int row;
     
@@ -19,7 +18,7 @@ public class Cell extends JComponent{
     private Cell[] adjecent;
     
     
-    private Life contains;
+    private Tile contains;
     
     Color color;
     
@@ -33,17 +32,11 @@ public class Cell extends JComponent{
     
     
     
-    
-    public void paint(Graphics g) {
-        g.setColor(getColor());
-        g.fillRect (0, 0, 20, 20);  
-    }
-    
     /**
      * Sets up the layout????
      */
     public void init(){
-        /////////////////////WHAT IS THIS SUPPOSED TO DO???
+        setBackground(Color.red);
     }
     
     public Color getColor(){
@@ -53,11 +46,11 @@ public class Cell extends JComponent{
         return color;
     }
     
-    public Life contains(){
+    public Tile contains(){
         return contains;
     }
     
-    public void moveTo(Life l){
+    public void moveTo(Tile l){
         contains = l;
     }
     

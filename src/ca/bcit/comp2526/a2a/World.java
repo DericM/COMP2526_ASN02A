@@ -10,7 +10,7 @@ public class World {
     
     private Cell[][] cells;
     
-    private ArrayList<Life> life;
+    private ArrayList<Tile> life;
     
     
     /**
@@ -23,7 +23,7 @@ public class World {
         rows = height;
         
         cells = new Cell[cols][rows];
-        life = new ArrayList<Life>();
+        life = new ArrayList<Tile>();
     }
     
     
@@ -135,7 +135,7 @@ public class World {
      * Takes a turn for every Life form.
      */
     public void takeTurn(){
-        for(Life l:life){
+        for(Tile l:life){
             l.takeTurn();
         }
     }

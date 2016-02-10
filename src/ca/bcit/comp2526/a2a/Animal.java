@@ -1,6 +1,7 @@
 package ca.bcit.comp2526.a2a;
 
-public abstract class Animal extends Life{
+@SuppressWarnings("serial")
+public abstract class Animal extends Tile{
 
     int movement;
     
