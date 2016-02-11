@@ -1,6 +1,6 @@
 package ca.bcit.comp2526.a2a;
 
-import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.Point;
 
 import javax.swing.BorderFactory;
@@ -34,10 +34,8 @@ public class Cell extends JPanel{
      * Sets up the layout????
      */
     public void init(){
-        setLayout(new BorderLayout(10,10));
-        setBorder(BorderFactory.createEmptyBorder(0,10,10,10)); 
-        if(contains != null)
-            add(contains);
+        setLayout(new GridLayout(0,1));
+        //setBorder(BorderFactory.createEmptyBorder(0,10,10,10)); 
     }
     
     
