@@ -71,7 +71,7 @@ public class Cell extends JPanel{
         for (int adjCol = row-1; adjCol <= col+1;adjCol++){
             for (int adjRow = col-1; adjRow <= row+1;adjRow++){
                 if(!(adjCol < 0 || adjRow < 0 ||
-                     adjCol >= world.getRowCount() || adjRow >= world.getColumnCount() || 
+                     adjCol >= world.getColumnCount() || adjRow >= world.getRowCount() || 
                      (adjCol == row && adjRow == col))){
                     //System.out.println("SAVED -- index:"+index+" adjrow:"+adjRow+" adjCol:"+adjCol);
                     adjCells[index] = world.getCellAt(adjCol, adjRow);
