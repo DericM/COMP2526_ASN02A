@@ -5,22 +5,18 @@ import java.awt.Color;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public abstract class Tile extends JPanel{
+public class Tile extends JPanel{
 
     
-    Color color;
+    private Color color;
+    
+    private Cell cell;
 
-    
-    public Color getColor(){
-        return color;
-    }
-    
-    public void setColor(){
+    Tile(Cell c, Color cl){
+        color = cl;
         setBackground(color);
+        cell = c;
+        cell.moveTo(this);
+        cell.add(this);
     }
-    
-    public void takeTurn(){
-        
-    }
-    
 }

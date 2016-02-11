@@ -1,50 +1,45 @@
 package ca.bcit.comp2526.a2a;
 
-import java.awt.Color;
+import java.awt.BorderLayout;
 import java.awt.Point;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class Cell extends JPanel{
 
-    private int row;
     
     private int col;
-    /* 
-     * An array of cells that are next to this cell.
-     * Borders are handled by setting the cells that would be there to null.
-     */
-    private Cell[] adjecent;
+    private int row;
     
+    private World world;
     
     private Tile contains;
     
-    Color color;
+
     
     
-    Cell(int r, int c){
+    Cell(int r, int c, World w){
         row = r;
         col = c;
-        color = Color.gray;
+        world = w;
         contains = null;
     }
     
+
     
     
     /**
      * Sets up the layout????
      */
     public void init(){
-        setBackground(Color.red);
+        setLayout(new BorderLayout(10,10));
+        setBorder(BorderFactory.createEmptyBorder(0,10,10,10)); 
+        if(contains != null)
+            add(contains);
     }
     
-    public Color getColor(){
-        if (contains != null){
-            return contains.getColor();
-        }
-        return color;
-    }
     
     public Tile contains(){
         return contains;
@@ -54,13 +49,44 @@ public class Cell extends JPanel{
         contains = l;
     }
     
-    public Cell[] getAdjecent(){
-        return adjecent;
+    
+    public int numberOfAdjecentCells(){
+        int sides = 0;
+        if(row == 0 || row == world.getRowCount())
+            sides++;
+        if(col == 0 || col == world.getColumnCount())
+            sides++;
+        if(sides == 1)
+            return 5;
+        if(sides == 2)
+            return 3;
+        return 8;
     }
     
-    public void setAdjecent(Cell[] cells){
-        adjecent = cells;
+    
+    
+    public Cell[] getAdjecentCells(){
+        Cell[] adjCells = new Cell[numberOfAdjecentCells()];
+        int index = 0;
+        
+        //for every adjacent cell.
+        for (int adjCol = row-1; adjCol <= col+1;adjCol++){
+            for (int adjRow = col-1; adjRow <= row+1;adjRow++){
+                if(!(adjCol < 0 || adjRow < 0 ||
+                     adjCol >= world.getRowCount() || adjRow >= world.getColumnCount() || 
+                     (adjCol == row && adjRow == col))){
+                    //System.out.println("SAVED -- index:"+index+" adjrow:"+adjRow+" adjCol:"+adjCol);
+                    adjCells[index] = world.getCellAt(adjCol, adjRow);
+                    index++;
+                }
+            }
+        }
+        return adjCells;
     }
+    
+
+    
+    
     
     public Point getLocation(){
         return new Point(col, row);

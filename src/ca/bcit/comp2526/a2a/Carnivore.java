@@ -1,12 +1,18 @@
 package ca.bcit.comp2526.a2a;
 
-public class Carnivore extends Animal{
+import java.awt.Color;
 
-    @Override
-    void move(Cell c) {
-        // TODO Auto-generated method stub
-        
+@SuppressWarnings("serial")
+public class Carnivore extends Movable{
+
+    static private final int defaultMovement = 1;
+    static private final Color defaultColor = Color.yellow;
+    
+    Carnivore(Cell c) {
+        super(c, defaultColor, defaultMovement);
     }
+
+
 
     
     

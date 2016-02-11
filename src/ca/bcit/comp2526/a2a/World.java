@@ -4,13 +4,16 @@ import java.util.ArrayList;
 
 public class World {
     
+    private final int numberOfPlants = 100;
+    private final int numberOfHerbivores = 10;
+    
     
     private int cols;
     private int rows;
     
     private Cell[][] cells;
     
-    private ArrayList<Tile> life;
+    private ArrayList<Movable> moveable;
     
     
     /**
@@ -23,7 +26,7 @@ public class World {
         rows = height;
         
         cells = new Cell[cols][rows];
-        life = new ArrayList<Tile>();
+        moveable = new ArrayList<Movable>();
     }
     
     
@@ -32,10 +35,8 @@ public class World {
      */
     public void init(){
         initCells();
-        setAdjCells();
-        makePlants(100);
-        makeHerbivores(10);
-        
+        makePlants(numberOfPlants);
+        makeHerbivores(numberOfHerbivores);
     }
     
     
@@ -45,65 +46,23 @@ public class World {
     private void initCells(){
         for(int i=0; i < cols;i++){
             for(int j=0; j < rows;j++){
-                cells[i][j] = new Cell(i,j);
+                cells[i][j] = new Cell(i, j, this);
             }
         }
     }
     
-    /*
-     * Connects all the cells to their adjacent cells.
-     */
-    private void setAdjCells(){
-        Cell [] adjCells;
-        //for every cell in the array
-        for(int cellCol=0; cellCol < cols;cellCol++){
-            for(int cellRow=0; cellRow < rows;cellRow++){
-                
-                adjCells = new Cell [9];
-                int index = 0;
-                
-                int outerCol = cellCol - 1;
-                int outerRow = cellRow - 1;
-                
-                
-                //for every adjacent cell of each individual cell.
-                for (int adjCol=outerRow; adjCol < outerCol+3;adjCol++){
-                    for (int adjRow=outerCol; adjRow < outerRow+3;adjRow++){
-                        if(!(adjCol < 0 || adjRow < 0 ||
-                                adjCol >= rows || adjRow >= cols || 
-                                (adjCol == cellRow && adjRow == cellCol))){
-                            //System.out.println("SAVED -- index:"+index+" adjrow:"+adjRow+" adjCol:"+adjCol);
-                            adjCells[index] = cells[adjCol][adjRow];
-                        }
-                        
-                        else {
-                            //System.out.println("OUT BOUNDS -- index:"+index+" adjrow:"+adjRow+" adjCol:"+adjCol);
-                            adjCells[index] = null;
-                        }
-                        index++;
-                    }
-                }
-                cells[cellCol][cellRow].setAdjecent(adjCells);
-            }
-        }
-    }
+
     
     private void makePlants(int number){
         for(int i=0;i<number;i++){
-            Plant p = new Plant();
-            life.add(p);
-            Cell c = getEmptyCell();
-            c.moveTo(p);
+            new Plant(getEmptyCell());
         }
     }
     
 
     private void makeHerbivores(int number){
         for(int i=0;i<number;i++){
-            Herbivore h = new Herbivore();
-            life.add(h);
-            Cell c = getEmptyCell();
-            c.moveTo(h);
+            moveable.add(new Herbivore(getEmptyCell()));
         }
     }
     
@@ -135,8 +94,8 @@ public class World {
      * Takes a turn for every Life form.
      */
     public void takeTurn(){
-        for(Tile l:life){
-            l.takeTurn();
+        for(Movable m:moveable){
+            m.takeTurn();
         }
     }
     
