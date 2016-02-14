@@ -11,5 +11,12 @@ public class Herbivore extends Movable {
     Herbivore(Cell c){
         super(c, defaultColor, defaultMovement);
     }
+
+    @Override
+    boolean eatable(Tile t) {
+        if (t instanceof EatenByHerbivore)
+            return true;
+        return false;
+    }
     
 }

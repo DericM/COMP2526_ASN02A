@@ -1,5 +1,6 @@
 package ca.bcit.comp2526.a2a;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Point;
 
@@ -15,7 +16,7 @@ public class Cell extends JPanel{
     
     private World world;
     
-    private Tile contains;
+    private Tile tile;
     
 
     
@@ -24,7 +25,7 @@ public class Cell extends JPanel{
         row = r;
         col = c;
         world = w;
-        contains = null;
+        tile = null;
     }
     
 
@@ -34,17 +35,20 @@ public class Cell extends JPanel{
      * Sets up the layout????
      */
     public void init(){
-        setLayout(new GridLayout(0,1));
-        //setBorder(BorderFactory.createEmptyBorder(0,10,10,10)); 
+     
+        setLayout(new GridLayout(1,1));
+        setBorder(BorderFactory.createLineBorder(Color.black)); 
     }
     
     
-    public Tile contains(){
-        return contains;
+    public Tile getTile(){
+        return tile;
     }
+   
     
-    public void moveTo(Tile l){
-        contains = l;
+    
+    public void setTile(Tile t){
+        tile = t;
     }
     
     
@@ -63,6 +67,7 @@ public class Cell extends JPanel{
     
     
     
+    
     public Cell[] getAdjecentCells(){
         Cell[] adjCells = new Cell[numberOfAdjecentCells()];
         int index = 0;
@@ -70,10 +75,7 @@ public class Cell extends JPanel{
         //for every adjacent cell.
         for (int adjCol = row-1; adjCol <= col+1;adjCol++){
             for (int adjRow = col-1; adjRow <= row+1;adjRow++){
-                if(!(adjCol < 0 || adjRow < 0 ||
-                     adjCol >= world.getColumnCount() || adjRow >= world.getRowCount() || 
-                     (adjCol == row && adjRow == col))){
-                    //System.out.println("SAVED -- index:"+index+" adjrow:"+adjRow+" adjCol:"+adjCol);
+                if(cellInBounds(adjCol, adjRow)){
                     adjCells[index] = world.getCellAt(adjCol, adjRow);
                     index++;
                 }
@@ -83,8 +85,33 @@ public class Cell extends JPanel{
     }
     
 
+    public Cell[] getAdjecentCells(Movable m){
+        
+        
+        Cell[] adjCells = getAdjecentCells();
+        Cell[] adjEatableFirst = new Cell[adjCells.length];
+        int startIndex = 0;
+        int endIndex = adjCells.length;
+        for(int i=0;i<adjCells.length;i++){
+            if(m.eatable(adjCells[i].getTile())){
+                adjEatableFirst[startIndex++] = adjCells[i];
+            } else {
+                adjEatableFirst[endIndex++] = adjCells[i];
+            }
+        }
+
+        return adjEatableFirst;
+    }
     
-    
+    private boolean cellInBounds(int adjCol, int adjRow){
+        return  
+            !   ( adjCol <  0 
+              ||  adjRow <  0 
+              ||  adjCol >= world.getColumnCount() 
+              ||  adjRow >= world.getRowCount() 
+              || (adjCol == row  &&  adjRow == col)
+                );
+    }
     
     public Point getLocation(){
         return new Point(col, row);

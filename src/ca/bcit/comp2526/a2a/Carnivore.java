@@ -12,10 +12,11 @@ public class Carnivore extends Movable{
         super(c, defaultColor, defaultMovement);
     }
 
-
-
-    
-    
-    
+    @Override
+    boolean eatable(Tile t) {
+        if (t instanceof EatenByCarnivore)
+            return true;
+        return false;
+    }
     
 }

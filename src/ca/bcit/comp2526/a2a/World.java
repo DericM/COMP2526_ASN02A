@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 public class World {
     
-    private final int numberOfPlants = 100;
-    private final int numberOfHerbivores = 10;
-    
     
     private int cols;
     private int rows;
@@ -34,47 +31,24 @@ public class World {
      * Initialize the world
      */
     public void init(){
-        initCells();
-        makePlants(numberOfPlants);
-        makeHerbivores(numberOfHerbivores);
-    }
-    
-    
-    /*
-     * Instantiates all the cells
-     */
-    private void initCells(){
         for(int i=0; i < cols;i++){
             for(int j=0; j < rows;j++){
+                
                 cells[i][j] = new Cell(i, j, this);
+                cells[i][j].init();
+                
+                int r = RandomGenerator.nextNumber(9)+1;
+                
+                if(r <= 3)
+                    new Plant(cells[i][j]);
+                else if(r > 3 && r <= 4)
+                    moveable.add(new Herbivore(cells[i][j]));
+                else
+                    new Blank(cells[i][j]);
             }
         }
     }
     
-
-    
-    private void makePlants(int number){
-        for(int i=0;i<number;i++){
-            new Plant(getEmptyCell());
-        }
-    }
-    
-
-    private void makeHerbivores(int number){
-        for(int i=0;i<number;i++){
-            moveable.add(new Herbivore(getEmptyCell()));
-        }
-    }
-    
-    
-    private Cell getEmptyCell(){
-        Cell c;
-        do {
-            c = cells[RandomGenerator.nextNumber(25)]
-                      [RandomGenerator.nextNumber(25)];
-        } while(c.contains() != null);
-        return c;
-    }
     
     
     
