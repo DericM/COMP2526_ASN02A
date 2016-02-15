@@ -41,6 +41,5 @@ public class GameFrame
     {
         world.takeTurn();
         repaint();
-        System.out.println("sdafasdf");
     }
 }

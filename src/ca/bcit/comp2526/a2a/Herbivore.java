@@ -5,8 +5,10 @@ import java.awt.Color;
 @SuppressWarnings("serial")
 public class Herbivore extends Movable {
 
-    static private final int defaultMovement = 1;
-    static private final Color defaultColor = Color.yellow;
+    public static final double spawnRate = 10;
+    
+    private static final int defaultMovement = 1;
+    private static final Color defaultColor = Color.yellow;
     
     Herbivore(Cell c){
         super(c, defaultColor, defaultMovement);

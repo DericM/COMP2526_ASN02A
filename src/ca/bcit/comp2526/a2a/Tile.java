@@ -5,8 +5,7 @@ import java.awt.Color;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class Tile extends JPanel{
-
+public abstract class Tile extends JPanel{
     
     private Color color;
     
@@ -17,7 +16,17 @@ public class Tile extends JPanel{
         setBackground(color);
         cell = c;
         cell.setTile(this);
-        cell.add(this);
+    }
+
+    
+    
+    
+    
+    public static boolean spawn(int rate, int spawnMin, int spawnMax){
+        System.out.println("Spawnmin: " + spawnMin + "SpawnMax: " + spawnMax);
+        if(rate >= spawnMin && rate <= spawnMax)
+            return true;
+        return false;
     }
     
 }

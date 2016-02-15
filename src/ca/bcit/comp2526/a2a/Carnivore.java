@@ -5,6 +5,8 @@ import java.awt.Color;
 @SuppressWarnings("serial")
 public class Carnivore extends Movable{
 
+    static public final double spawnRate = 0.1;
+    
     static private final int defaultMovement = 1;
     static private final Color defaultColor = Color.yellow;
     

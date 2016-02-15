@@ -37,14 +37,20 @@ public class World {
                 cells[i][j] = new Cell(i, j, this);
                 cells[i][j].init();
                 
-                int r = RandomGenerator.nextNumber(9)+1;
-                
-                if(r <= 3)
+                switch (SpawnType.spawn()) {
+                case PLANT:
                     new Plant(cells[i][j]);
-                else if(r > 3 && r <= 4)
+                    break;
+                case HERBIVORE:
                     moveable.add(new Herbivore(cells[i][j]));
-                else
+                    break;   
+                case CARNIVORE:
+                    moveable.add(new Carnivore(cells[i][j]));
+                    break;
+                default:
                     new Blank(cells[i][j]);
+                    break;
+                }
             }
         }
     }
@@ -68,6 +74,7 @@ public class World {
      * Takes a turn for every Life form.
      */
     public void takeTurn(){
+        System.out.println("take turn");
         for(Movable m:moveable){
             m.takeTurn();
         }
