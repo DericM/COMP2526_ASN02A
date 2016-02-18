@@ -1,5 +1,10 @@
 package ca.bcit.comp2526.a2a;
 
+/**
+ * 
+ * @author Deric
+ *
+ */
 public enum SpawnType {
     PLANT     (0,  3),
     HERBIVORE (3,  4), 

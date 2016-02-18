@@ -1,4 +1,4 @@
-package ca.bcit.comp2526.a2a;
+package interfaces;
 
 public interface EatenByCarnivore {
 
