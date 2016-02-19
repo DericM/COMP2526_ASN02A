@@ -1,11 +1,11 @@
 package ca.bcit.comp2526.a2a;
 
-import tiles.Carnivore;
-import tiles.Herbivore;
-import tiles.Movable;
-import tiles.Plant;
-
 import java.util.ArrayList;
+
+import ca.bcit.comp2526.a2a.tiles.Carnivore;
+import ca.bcit.comp2526.a2a.tiles.Herbivore;
+import ca.bcit.comp2526.a2a.tiles.Movable;
+import ca.bcit.comp2526.a2a.tiles.Plant;
 
 /**
  * Represents a World that contains a grid of Cells. Contains a list of movable

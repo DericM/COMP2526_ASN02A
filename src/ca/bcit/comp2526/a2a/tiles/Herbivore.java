@@ -1,25 +1,28 @@
-package tiles;
+package ca.bcit.comp2526.a2a.tiles;
 
 import ca.bcit.comp2526.a2a.Cell;
-import interfaces.EatenByCarnivore;
+import ca.bcit.comp2526.a2a.interfaces.EatenByCarnivore;
+import ca.bcit.comp2526.a2a.interfaces.EatenByHerbivore;
 
 import java.awt.Color;
 
+
 @SuppressWarnings("serial")
-public class Carnivore extends Movable{
+public class Herbivore extends Movable implements EatenByCarnivore {
 
     /** The default movements. */
     private static final int defaultMovement = 5;
     /** Randomly generated shade of yellow. */
-    private static final Color defaultColor = Color.red;
+    private static final Color defaultColor = Color.yellow;
     
     /**
      * Constructor.
-     * @param cell the cell to place the Carnivore inside of.
+     * @param c the cell to place this herbivore.
      */
-    public Carnivore(Cell cell) {
+    public Herbivore(Cell cell) {
         super(cell, newShade(defaultColor), defaultMovement);
     }
+    
 
     /**
      * Returns true if this tile can eat t.
@@ -27,10 +30,9 @@ public class Carnivore extends Movable{
      */
     @Override
     public boolean eat(Tile tile) {
-        if (tile instanceof EatenByCarnivore) {
+        if (tile instanceof EatenByHerbivore) {
             return true;
         }
         return false;
     }
-    
 }

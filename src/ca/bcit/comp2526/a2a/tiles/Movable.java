@@ -1,4 +1,4 @@
-package tiles;
+package ca.bcit.comp2526.a2a.tiles;
 
 import ca.bcit.comp2526.a2a.Cell;
 

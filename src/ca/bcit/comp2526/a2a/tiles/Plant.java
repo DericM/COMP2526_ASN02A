@@ -1,7 +1,7 @@
-package tiles;
+package ca.bcit.comp2526.a2a.tiles;
 
 import ca.bcit.comp2526.a2a.Cell;
-import interfaces.EatenByHerbivore;
+import ca.bcit.comp2526.a2a.interfaces.EatenByHerbivore;
 
 import java.awt.Color;
 

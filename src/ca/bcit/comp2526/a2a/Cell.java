@@ -1,6 +1,6 @@
 package ca.bcit.comp2526.a2a;
 
-import tiles.Tile;
+import ca.bcit.comp2526.a2a.tiles.Tile;
 
 import java.awt.Color;
 import java.awt.GridLayout;
