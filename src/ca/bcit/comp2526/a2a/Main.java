@@ -10,21 +10,21 @@ import javax.swing.JFrame;
  * @author BCIT
  * @version 1.0
  */
-public final class Main
-{
+public final class Main {
     private static final Toolkit TOOLKIT;
 
-    static
-    {
+    static {
         TOOLKIT = Toolkit.getDefaultToolkit();
     }
 
-    private Main()
-    {
+    private Main() {
     }
-
-    public static void main(final String[] argv)
-    {
+    
+    /**
+     * main.
+     * @param argv .
+     */
+    public static void main(final String[] argv) {
         final GameFrame frame;
         final World     world;
 
@@ -38,8 +38,7 @@ public final class Main
         frame.setVisible(true);
     }
 
-    private static void position(final GameFrame frame)
-    {
+    private static void position(final GameFrame frame) {
         final Dimension size;
 
         size = calculateScreenArea(0.80f,
@@ -48,12 +47,15 @@ public final class Main
         frame.setLocation(centreOnScreen(size));
     }
 
-    public static Point centreOnScreen(final Dimension size)
-    {
+    /**
+     * Point.
+     * @param size .
+     * @return center point.
+     */
+    public static Point centreOnScreen(final Dimension size) {
         final Dimension screenSize;
 
-        if(size == null)
-        {
+        if (size == null) {
             throw new IllegalArgumentException("Size cannot be null");
         }
 
@@ -63,27 +65,30 @@ public final class Main
                           (screenSize.height - size.height) / 2));
     }
 
+    /**
+     *  Dimension.
+     * @param widthPercent .
+     * @param heightPercent .
+     * @return Dimension.
+     */
     public static Dimension calculateScreenArea(final float widthPercent,
-                                                final float heightPercent)
-    {
+                                                final float heightPercent) {
         final Dimension screenSize;
         final Dimension area;
         final int       width;
         final int       height;
         final int       size;
 
-        if((widthPercent <= 0.0f) || (widthPercent > 100.0f))
-        {
-            throw new IllegalArgumentException("widthPercent cannot be " + 
-                                               "<= 0 or > 100 - got: " +
-                                               widthPercent);
+        if ((widthPercent <= 0.0f) || (widthPercent > 100.0f)) {
+            throw new IllegalArgumentException("widthPercent cannot be " 
+                                                + "<= 0 or > 100 - got: " 
+                                                + widthPercent);
         }
 
-        if((heightPercent <= 0.0f) || (heightPercent > 100.0f))
-        {
-            throw new IllegalArgumentException("heightPercent cannot be " + 
-                                               "<= 0 or > 100 - got: " +
-                                               heightPercent);
+        if ((heightPercent <= 0.0f) || (heightPercent > 100.0f)) {
+            throw new IllegalArgumentException("heightPercent cannot be " 
+                                                + "<= 0 or > 100 - got: " 
+                                                + heightPercent);
         }
 
         screenSize = TOOLKIT.getScreenSize();

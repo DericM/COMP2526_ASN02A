@@ -9,7 +9,7 @@ public class TurnListener extends MouseAdapter {
     GameFrame gameFrame;
     
     
-    TurnListener(GameFrame gf){
+    TurnListener(GameFrame gf) {
         gameFrame = gf;
     }
     

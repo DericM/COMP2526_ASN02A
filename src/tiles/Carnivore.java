@@ -1,23 +1,24 @@
 package tiles;
 
-import java.awt.Color;
 import ca.bcit.comp2526.a2a.Cell;
 import interfaces.EatenByCarnivore;
+
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class Carnivore extends Movable{
 
     /** The default movements. */
-    static private final int defaultMovement = 5;
+    private static final int defaultMovement = 5;
     /** Randomly generated shade of yellow. */
-    static private final Color defaultColor = Color.red;
+    private static final Color defaultColor = Color.red;
     
     /**
      * Constructor.
-     * @param c
+     * @param cell the cell to place the Carnivore inside of.
      */
-    public Carnivore(Cell c) {
-        super(c, newShade(defaultColor), defaultMovement);
+    public Carnivore(Cell cell) {
+        super(cell, newShade(defaultColor), defaultMovement);
     }
 
     /**
@@ -25,9 +26,10 @@ public class Carnivore extends Movable{
      * @param t the tile to be eaten.
      */
     @Override
-    public boolean eat(Tile t) {
-        if (t instanceof EatenByCarnivore)
+    public boolean eat(Tile tile) {
+        if (tile instanceof EatenByCarnivore) {
             return true;
+        }
         return false;
     }
     

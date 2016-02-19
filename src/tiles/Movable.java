@@ -1,13 +1,14 @@
 package tiles;
 
+import ca.bcit.comp2526.a2a.Cell;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 
-import ca.bcit.comp2526.a2a.Cell;
-
 /**
- * Represents a Tile that is capable of movement.
- * It has a number of movements allocated to it.
+ * Represents a Tile that is capable of movement. It has a number of movements
+ * allocated to it.
+ * 
  * @author Deric
  * @version 1.0
  */
@@ -16,42 +17,43 @@ public abstract class Movable extends Tile {
 
     /** The number of movements remaining. */
     private int movement;
-    
-    /** Label to display life and location*/
-    private JLabel j;
-    
+
+    /** Label to display life and location. */
+    private JLabel label;
+
     /**
      * Constructor.
-     * @param c the cell to be passed to the Tile constructor.
-     * @param cl the color to be passed to the Tile constructor.
-     * @param l the number of life points.
+     * 
+     * @param c
+     *            the cell to be passed to the Tile constructor.
+     * @param cl
+     *            the color to be passed to the Tile constructor.
+     * @param l
+     *            the number of life points.
      */
-    Movable(Cell c, Color cl, int l) {
-        super(c, cl);
-        movement = l;
-        j = new JLabel();
+    Movable(Cell cell, Color cl, int moves) {
+        super(cell, cl);
+        movement = moves;
+        label = new JLabel();
         printLable();
-        add(j);
+        add(label);
     }
-    
-    
+
     /**
-     * Takes a turn for this Movable tile.
-     * Moves the tile if it can.
-     * Remove the tile if it is dead.
+     * Takes a turn for this Movable tile. Moves the tile if it can. Remove the
+     * tile if it is dead.
+     * 
      * @return True if the tile moved, false if not.
      */
-    public boolean takeTurn(){
+    public boolean takeTurn() {
         Cell target = getCell().targetCell();
-        if(movement <= 0){
+        if (movement <= 0) {
             removeThis();
             return false;
-        }
-        else if (target == null){
-            ;//wait a turn
-        }
-        else {
-            if(getCell().tileCanEat(target.getTile())){
+        } else if (target == null) {
+            ;// wait a turn
+        } else {
+            if (getCell().tileCanEat(target.getTile())) {
                 movement = 6;
             }
             move(target);
@@ -60,35 +62,33 @@ public abstract class Movable extends Tile {
         printLable();
         return true;
     }
-    
+
     /*
      * Prints a basic label onto the tiles for testing.
      */
-    private void printLable(){
-        j.setText(
-                    "(" + movement + ") \n" + 
-                    (int)getCell().getLocation().getY()+ "," +
-                    (int)getCell().getLocation().getX() 
-                 );
+    private void printLable() {
+        label.setText("(" + movement + ") \n" + (int) getCell().getLocation().getY() + ","
+                + (int) getCell().getLocation().getX());
     }
-    
-    
-    /* 
+
+    /*
      * Removes this tile from its cell.
      */
-    private void removeThis(){
+    private void removeThis() {
         getCell().setTile(null);
         setCell(null);
     }
-    
+
     /*
      * Moves the cell to a target cell.
+     * 
      * @param target cell to move to.
      */
-    private void move(Cell target){
+    private void move(Cell target) {
         getCell().setTile(null);
         target.setTile(this);
         setCell(target);
     }
     
+
 }

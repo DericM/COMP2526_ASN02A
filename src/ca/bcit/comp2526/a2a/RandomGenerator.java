@@ -5,12 +5,10 @@ package ca.bcit.comp2526.a2a;
  * @author  BCIT
  * @version 1.0
  */
-public final class RandomGenerator
-{
+public final class RandomGenerator {
     private static final int[] NUMBERS;
     
-    static
-    {
+    static {
         NUMBERS = new int[]
         {
             -1155484576,
@@ -274,27 +272,25 @@ public final class RandomGenerator
     
     private static int next;
     
-    private RandomGenerator()
-    {
+    private RandomGenerator() {
     }
 
-    public static void reset()
-    {
+    public static void reset() {
         next = 0;
     }
     
-    public static int nextNumber(final int max)
-    {
-        try
-        {
+    /**
+     * nextNumber.
+     * @param max .
+     * @return next random number.
+     */
+    public static int nextNumber(final int max) {
+        try {
             return (Math.abs(NUMBERS[next]) % max);
-        }
-        finally
-        {
+        } finally {
             next++;
 
-            if(next >= NUMBERS.length)
-            {
+            if (next >= NUMBERS.length) {
                 next = 0;
             }
         }

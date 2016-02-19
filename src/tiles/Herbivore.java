@@ -1,9 +1,11 @@
 package tiles;
 
-import java.awt.Color;
 import ca.bcit.comp2526.a2a.Cell;
 import interfaces.EatenByCarnivore;
 import interfaces.EatenByHerbivore;
+
+import java.awt.Color;
+
 
 @SuppressWarnings("serial")
 public class Herbivore extends Movable implements EatenByCarnivore {
@@ -17,8 +19,8 @@ public class Herbivore extends Movable implements EatenByCarnivore {
      * Constructor.
      * @param c the cell to place this herbivore.
      */
-    public Herbivore(Cell c){
-        super(c, newShade(defaultColor), defaultMovement);
+    public Herbivore(Cell cell) {
+        super(cell, newShade(defaultColor), defaultMovement);
     }
     
 
@@ -27,9 +29,10 @@ public class Herbivore extends Movable implements EatenByCarnivore {
      * @param t the tile to be eaten.
      */
     @Override
-    public boolean eat(Tile t) {
-        if (t instanceof EatenByHerbivore)
+    public boolean eat(Tile tile) {
+        if (tile instanceof EatenByHerbivore) {
             return true;
+        }
         return false;
     }
 }

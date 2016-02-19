@@ -1,39 +1,49 @@
 package ca.bcit.comp2526.a2a;
 
+import java.util.ArrayList;
+
 /**
- * 
+ * SpawnType for each possible tile type in the world.
+ * Each Tile type has a number of tickets in the pool.
  * @author Deric
  *
  */
 public enum SpawnType {
-    PLANT     (0,  3),
-    HERBIVORE (3,  4), 
-    CARNIVORE (5,  -1),
-    BLANK     (0,  -1);
-    
-    private static final int spawnPool = 9;
-    private final int spawnMin;
-    private final int spawnMax;
-    
-    SpawnType(int min, int max){
-        spawnMin = min;
-        spawnMax = max;
+    PLANT(3), HERBIVORE(1), CARNIVORE(0), NULL(6);
+
+    private static final int poolSize = 10;
+    private static ArrayList<SpawnType> spawnPool = new ArrayList<SpawnType>();
+    private int tickets;
+
+    /**
+     * Constructor.
+     * @param tickets for each SpawnType.
+     */
+    SpawnType(int tickets) {
+        this.tickets = tickets;
     }
     
-    private boolean inbounds(int r){
-        if(r >= spawnMin && r < spawnMax)
-            return true;
-        return false;
-    }
-    
-    
-    public static SpawnType spawn(){
-        int rand = RandomGenerator.nextNumber(spawnPool);
-        for(SpawnType s:SpawnType.values()){
-            if(s.inbounds(rand))
-                return s;
+    /*
+     * Adds the SpawnTypes to the SpawnPool.
+     */
+    private static void init() {
+        for (SpawnType st:values()) {
+            for (int i = 0;i < st.tickets;i++) {
+                spawnPool.add(st);
+            }
         }
-        return SpawnType.BLANK;
     }
     
+    /**
+     * Returns a random spawn type.
+     * @return the SpawnType to be returned.
+     */
+    public static SpawnType spawn() {
+        if (spawnPool.size() != poolSize) {
+            init();
+        }
+        int rand = RandomGenerator.nextNumber(poolSize - 1);
+        return spawnPool.get(rand);
+    }
+
 }

@@ -1,8 +1,9 @@
 package tiles;
 
-import java.awt.Color;
 import ca.bcit.comp2526.a2a.Cell;
 import interfaces.EatenByHerbivore;
+
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class Plant extends Tile implements EatenByHerbivore {
@@ -14,8 +15,8 @@ public class Plant extends Tile implements EatenByHerbivore {
      * Constructor.
      * @param c the cell to place the plant.
      */
-    public Plant(Cell c){
-        super(c, newShade(defaultColor));
+    public Plant(Cell cell) {
+        super(cell, newShade(defaultColor));
     }
 
     /**
@@ -23,7 +24,7 @@ public class Plant extends Tile implements EatenByHerbivore {
      * @param t the tile to be eaten.
      */
     @Override
-    public boolean eat(Tile t) {
+    public boolean eat(Tile tile) {
         return false;
     }
 
