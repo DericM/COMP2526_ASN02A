@@ -29,6 +29,8 @@ public class Cell extends JPanel {
     private World world;
     /** The tile contained in the cell. */
     private Tile tile;
+    
+    private ArrayList<Cell> adjecent;
 
     /**
      * Construct a new cell.
@@ -65,11 +67,8 @@ public class Cell extends JPanel {
         ArrayList<Cell> pred = new ArrayList<Cell>();
         ArrayList<Cell> blank = new ArrayList<Cell>();
         ArrayList<Cell> mate = new ArrayList<Cell>();
-        ArrayList<Cell> adj;
 
-        adj = getAdjecentCells();
-
-        for (Cell cell : adj) {
+        for (Cell cell : adjecent) {
             if (cell.getTile() == null) {
                 blank.add(cell);
             } else if (cell.tileCanEat(tile)) {
@@ -96,7 +95,7 @@ public class Cell extends JPanel {
      * 
      * @return a list of the adjacent tiles.
      */
-    private ArrayList<Cell> getAdjecentCells() {
+    public void connectAdjecentCells() {
         ArrayList<Cell> adj = new ArrayList<Cell>();
         Cell cell;
 
@@ -108,7 +107,7 @@ public class Cell extends JPanel {
                 }
             }
         }
-        return adj;
+        adjecent = adj;
     }
 
     /*
@@ -137,8 +136,12 @@ public class Cell extends JPanel {
      * @return True if cell exists, false if not.
      */
     private boolean cellExists(int col, int row) {
-        return !(col < 0 || row < 0 || col >= world.getRowCount() || row >= world.getColumnCount()
-                || (col == this.col && row == this.row));
+        return !(  col < 0 
+                || row < 0 
+                || col >= world.getRowCount() 
+                || row >= world.getColumnCount()
+                || (col == this.col && row == this.row)
+               );
     }
 
     /**

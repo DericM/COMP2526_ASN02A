@@ -34,6 +34,9 @@ public class GameFrame extends JFrame {
         addMouseListener(new TurnListener(this));
     }
 
+    /**
+     * Takes a turn.
+     */
     public void takeTurn() {
         world.takeTurn();
         repaint();

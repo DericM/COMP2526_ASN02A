@@ -2,6 +2,7 @@ package ca.bcit.comp2526.a2a.tiles;
 
 import ca.bcit.comp2526.a2a.Cell;
 import ca.bcit.comp2526.a2a.RandomGenerator;
+import ca.bcit.comp2526.a2a.SpawnType;
 
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -22,6 +23,7 @@ public abstract class Tile extends JPanel {
     /* The Cell containing this Tile. */
     private Cell cell;
 
+    private SpawnType spawnType;
     /**
      * Constructor.
      * 

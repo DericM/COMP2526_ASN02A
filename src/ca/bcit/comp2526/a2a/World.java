@@ -54,6 +54,11 @@ public class World {
                 spawn(cell);
             }
         }
+        for (int i = 0; i < cols; i++) {
+            for (int j = 0; j < rows; j++) {
+                cells[i][j].connectAdjecentCells();
+            }
+        }
     }
 
     /*

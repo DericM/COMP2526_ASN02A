@@ -21,7 +21,7 @@ public final class Main {
     }
     
     /**
-     * main.
+     * main entry point of program.
      * @param argv .
      */
     public static void main(final String[] argv) {
@@ -48,8 +48,8 @@ public final class Main {
     }
 
     /**
-     * Point.
-     * @param size .
+     * Centers the GameFrame on the screen.
+     * @param size of screen.
      * @return center point.
      */
     public static Point centreOnScreen(final Dimension size) {
@@ -66,10 +66,10 @@ public final class Main {
     }
 
     /**
-     *  Dimension.
-     * @param widthPercent .
-     * @param heightPercent .
-     * @return Dimension.
+     *  Calculates the screen area.
+     * @param widthPercent width as percent of screen size.
+     * @param heightPercent height as percent of screen size.
+     * @return the screens area.
      */
     public static Dimension calculateScreenArea(final float widthPercent,
                                                 final float heightPercent) {
